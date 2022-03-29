@@ -54,11 +54,37 @@ public class TextInput {
 	}
 	
 	
+	public ArrayList<String> getAllWordsOfInputtedText() {
+		ArrayList<String> allText = new ArrayList<String>();
+		
+		String line = input.nextLine();
+		String tempArgument = "";
+//		while (line != "end") {
+			for (int i = 0; i < line.length(); i++) {
+				if (line.charAt(i) != ' ') {
+					tempArgument += line.charAt(i);
+				} 
+				
+				if (line.charAt(i) == ' ' || (i + 1 == line.length())){
+					allText.add(tempArgument);
+					tempArgument = "";
+				}
+			}
+//			System.out.println(line);
+//		}
+			
+		System.out.println(allText);
+		return allText;
+		
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		TextInput text = new TextInput();
 //		System.out.println(text.getAllArguments().toString());
-		text.getAllArguments();
+//		text.getAllArguments();
+		text.getAllWordsOfInputtedText();
 		
 //		ArrayList<String> argums = text.getAllArguments();
 		
