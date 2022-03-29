@@ -12,18 +12,19 @@ class TextInputJUnitTests {
 	
 //	@BeforeEach
 //	void setup() {
-//
-////		TextInput mockScanner = new TextInput();
 //		
 //	}
 	
 	@Test
 	void getOneArgumentTest() {
 		TextInput text = new TextInput();
-		ArrayList<String> arguments = text.getAllArguments();
+		System.out.println("TYPE: 'test'");
 		
+		ArrayList<String> arguments = text.getAllArguments();
 		ArrayList<String> testArguments = new ArrayList<String>();
 		testArguments.add("test");
+		
+		
 		
 		assertEquals(testArguments, arguments);
 		
@@ -32,11 +33,14 @@ class TextInputJUnitTests {
 	@Test
 	void getTwoArgumentsTest() {
 		TextInput text = new TextInput();
-		ArrayList<String> arguments = text.getAllArguments();
+		System.out.println("TYPE: 'test hello'");
 		
+		ArrayList<String> arguments = text.getAllArguments();
 		ArrayList<String> testArguments = new ArrayList<String>();
 		testArguments.add("test");
 		testArguments.add("hello");
+		
+		
 		
 		assertEquals(testArguments, arguments);
 		
@@ -45,12 +49,15 @@ class TextInputJUnitTests {
 	@Test
 	void getThreeArgumentsTest() {
 		TextInput text = new TextInput();
-		ArrayList<String> arguments = text.getAllArguments();
+		System.out.println("TYPE: 'test hello world'");
 		
+		ArrayList<String> arguments = text.getAllArguments();
 		ArrayList<String> testArguments = new ArrayList<String>();
 		testArguments.add("test");
 		testArguments.add("hello");
 		testArguments.add("world");
+		
+		
 		
 		assertEquals(testArguments, arguments);
 		
