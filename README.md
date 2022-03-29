@@ -10,6 +10,15 @@ Is there anything that you implemented but doesn't currently work? I don't think
 
 
 ## Statistics Branch
+What user stories were completed this iteration? I have finished a class that calculateese basic statistics/summary of an String array input including the word count and the first longest word.
+
+What user stories do you intend to complete next iteration? making methods that calculate more advanced statistics/summary of the String array input such as the total number of characters or all longest words if there is a tie.
+
+Is there anything that you implemented but doesn't currently work? No, I believe everything works currently.
+
+What commands are needed to compile and run your code from the command line? None
+
+
 
 ## Start Script
 What user stories were completed this iteration? I'm currently developing a bash script that will start/run the java program from the command line
