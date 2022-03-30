@@ -20,6 +20,16 @@ What commands are needed to compile and run your code from the command line? Non
 
 
 
+## HeaderGenerator Branch
+What user stories were completed this iteration? I'm currently working on appending to the array list to add a generated header based on used input. 
+
+What user stories do you intend to complete next iteration? Add more methods to made the header more comprehensive and customizable.
+
+Is there anything that you implemented but doesn't currently work? Yes, there are problems in the path with my tests which is an error I haven't seen before so I'm working on fixing that now.
+
+What commands are needed to compile and run your code from the command line? None
+
+
 ## Start Script
 What user stories were completed this iteration? I'm currently developing a bash script that will start/run the java program from the command line
 
@@ -28,8 +38,6 @@ What user stories do you intend to complete next iteration? finish creating/deve
 Is there anything that you implemented but doesn't currently work? Yes, the script is not yet functional.
 
 What commands are needed to compile and run your code from the command line? The `javac -d` and `java -cp` commands are in the script. We are still not yet sure if we're going to implement other commands via the script.
-
-
 
 
 
