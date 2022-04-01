@@ -16,11 +16,11 @@ class TextInputJUnitTests {
 //	}
 	
 	@Test
-	void getOneArgumentTest() {
+	void getOneWordTest() {
 		TextInput text = new TextInput();
 		System.out.println("TYPE: 'test'");
 		
-		ArrayList<String> arguments = text.getAllArguments();
+		ArrayList<String> arguments = text.getAllWordsOfInputtedText();
 		ArrayList<String> testArguments = new ArrayList<String>();
 		testArguments.add("test");
 		
@@ -31,11 +31,11 @@ class TextInputJUnitTests {
 	}
 	
 	@Test
-	void getTwoArgumentsTest() {
+	void getWordsTest() {
 		TextInput text = new TextInput();
 		System.out.println("TYPE: 'test hello'");
 		
-		ArrayList<String> arguments = text.getAllArguments();
+		ArrayList<String> arguments = text.getAllWordsOfInputtedText();
 		ArrayList<String> testArguments = new ArrayList<String>();
 		testArguments.add("test");
 		testArguments.add("hello");
@@ -47,11 +47,11 @@ class TextInputJUnitTests {
 	}
 	
 	@Test
-	void getThreeArgumentsTest() {
+	void getThreeWordsTest() {
 		TextInput text = new TextInput();
 		System.out.println("TYPE: 'test hello world'");
 		
-		ArrayList<String> arguments = text.getAllArguments();
+		ArrayList<String> arguments = text.getAllWordsOfInputtedText();
 		ArrayList<String> testArguments = new ArrayList<String>();
 		testArguments.add("test");
 		testArguments.add("hello");
@@ -63,6 +63,25 @@ class TextInputJUnitTests {
 		
 	}
 	
+	@Test
+	void getSentenceWithPunctuationTest() {
+		TextInput text = new TextInput();
+		System.out.println("TYPE: 'hello world, this is a program!!'");
+		
+		ArrayList<String> arguments = text.getAllWordsOfInputtedText();
+		ArrayList<String> testArguments = new ArrayList<String>();
+		testArguments.add("hello");
+		testArguments.add("world,");
+		testArguments.add("this");
+		testArguments.add("is");
+		testArguments.add("a");
+		testArguments.add("program!!");
+		
+		
+		
+		assertEquals(testArguments, arguments);
+		
+	}
 	
 	
 
