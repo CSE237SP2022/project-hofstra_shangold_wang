@@ -4,19 +4,15 @@ import java.util.ArrayList;
 
 public class GoFish {
 	
-	private Player playerTo;
-	private Player playerFrom;
 	
 	public GoFish() {
-		this.playerTo = new Player();
-		this.playerFrom = new Player();
 	}
 	
-	public boolean cardFound(int card) {
+	public boolean cardFound(int card, ArrayList<Integer> playerDeck) {
 		boolean cardThere = false;
 		
-		for (int i = 0; i < this.playerFrom.deck.size(); i++) {
-			if (card == this.playerFrom.deck.get(i)) {
+		for (int i = 0; i < playerDeck.size(); i++) {
+			if (card == playerDeck.get(i)) {
 				cardThere = true;
 			}
 		}
@@ -24,23 +20,24 @@ public class GoFish {
 		return cardThere;
 	}
 	
-	public void moveCardPresent(int card) {
+	public void moveCardPresent(int card, ArrayList<Integer> playerToDeck, ArrayList<Integer> playerFromDeck) {
 		ArrayList<Integer> moveCards = new ArrayList<Integer>();
-		for (int i = 0; i < this.playerFrom.deck.size(); i++) {
-			if (card == this.playerFrom.deck.get(i)) {
+		for (int i = 0; i < playerFromDeck.size(); i++) {
+			if (card == playerFromDeck.get(i)) {
 				moveCards.add(card);
-				this.playerFrom.deck.remove(i);
+				playerFromDeck.remove(i);
+				i = i-1;
 			}
 		}
 		for (int i = 0; i < moveCards.size(); i++) {
-			this.playerTo.deck.add(card);
+			playerToDeck.add(card);
 		}
 	}
 	
-	public boolean moveCardAbsent(ArrayList<Integer> mainDeck) {
+	public boolean moveCardAbsent(ArrayList<Integer> playerToDeck, ArrayList<Integer> mainDeck) {
 		if (mainDeck.size() > 0) {
 			int card = mainDeck.remove(0);
-			this.playerTo.deck.add(card);
+			playerToDeck.add(card);
 			return true;
 		}
 		else {
