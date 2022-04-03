@@ -12,5 +12,9 @@ public class Player {
 		this.name = name;
 	}
 	
+	public ArrayList<Integer> getDeck() {
+		return this.deck;
+	}
+	
 	
 }
