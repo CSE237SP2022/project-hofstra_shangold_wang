@@ -24,7 +24,7 @@ public class PlayerTest {
 		
 		ArrayList<Integer> playerDeck = player.getDeck();
 		
-		assertEquals(playerDeck, testDeck);
+		assertEquals(testDeck, playerDeck);
 	}
 	
 	@Test
@@ -33,6 +33,45 @@ public class PlayerTest {
 	
 		String playerName = player.name;
 		
-		assertEquals(playerName, "test");
+		assertEquals("test", playerName);
+	}
+	
+	@Test
+	void testGetZeroPoints() {
+		Player player = new Player("test");
+		
+		int points = player.getPoints();
+		
+		assertEquals(0, points);
+	}
+	
+	@Test
+	void testAddFivePoints() {
+		Player player = new Player("test");
+		
+		player.addPoints(5);
+		int points = player.getPoints();
+		
+		assertEquals(5, points);
+	}
+	
+	@Test
+	void testAddZeroPoints() {
+		Player player = new Player("test");
+		
+		player.addPoints(0);
+		int points = player.getPoints();
+		
+		assertEquals(0, points);
+	}
+	
+	@Test
+	void testResetPoints() {
+		Player player = new Player("test");
+		
+		player.resetPoints();
+		int points = player.getPoints();
+		
+		assertEquals(0, points);
 	}
 }
