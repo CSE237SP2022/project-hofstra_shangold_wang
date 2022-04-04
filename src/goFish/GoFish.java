@@ -6,6 +6,7 @@ public class GoFish {
 	
 	
 	public GoFish() {
+		
 	}
 	
 	public boolean cardFound(int card, ArrayList<Integer> playerDeck) {
@@ -44,5 +45,36 @@ public class GoFish {
 			return false;
 		}
 	}
+	
+	public boolean fullSet(int card, ArrayList<Integer> playerDeck) {
+		int numberOfCard = 0;
+		for (int i = 0; i < playerDeck.size(); i++) {
+			if (card == playerDeck.get(i)) {
+				numberOfCard = numberOfCard + 1;
+			}
+		}
+		boolean setFull = false;
+		if (numberOfCard == 4) {
+			setFull = true;
+			for (int i = 0; i < playerDeck.size(); i++) {
+				if (card == playerDeck.get(i)) {
+					playerDeck.remove(i);
+					i = i-1;
+				}
+			}
+		}
+		
+		return setFull;
+	}
+	
+	public boolean emptyDeck(ArrayList<Integer> Deck) {
+		boolean empty = false;
+		if (Deck.size() == 0) {
+			empty = true;
+		}
+		return empty;
+	}
+	
+	
 	
 }
