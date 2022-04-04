@@ -65,5 +65,32 @@ class GoFishTest {
 		boolean mainDeckPresent = goFish.moveCardAbsent(playerToDeck, mainDeck);
 		assertEquals(true, mainDeckPresent);
 	}
+	
+	@Test
+	void fullSetFalse() {
+		boolean isFull = goFish.fullSet(1, playerFromDeck);
+		assertEquals(false, isFull);
+	}
+	
+	@Test
+	void fullSetTrue() {
+		playerFromDeck.add(1);
+		playerFromDeck.add(1);
+		playerFromDeck.add(1);
+		boolean isFull = goFish.fullSet(1, playerFromDeck);
+		assertEquals(true, isFull);
+	}
 
+	@Test
+	void emptySetFalse() {
+		boolean isEmpty = goFish.emptyDeck(playerFromDeck);
+		assertEquals(false, isEmpty);
+	}
+	
+	@Test
+	void emptySetTrue() {
+		boolean isEmpty = goFish.emptyDeck(mainDeck);
+		assertEquals(true, isEmpty);
+	}
+	
 }
