@@ -30,15 +30,17 @@ public class ShuffledDeck {
 		return this.notShuffledDeck;
 	}
 	
-	public ArrayList<Integer> addShuffledCardsIntoArray(){
-		 while (this.notShuffledDeck.size() > 0) {
-	            int indexOfCardRemoved = (int) (Math.random() * this.notShuffledDeck.size());
-	            int removedCard = notShuffledDeck.remove(indexOfCardRemoved);
-	            shuffledDeck.add(removedCard);
-	        }
+	public ArrayList<Integer> addShuffledCardsIntoArray() {
+		addCardsIntoArray();
+		while (this.notShuffledDeck.size() > 0) {
+			int indexOfCardRemoved = (int) (Math.random() * this.notShuffledDeck.size());
+			int removedCard = notShuffledDeck.remove(indexOfCardRemoved);
+	        shuffledDeck.add(removedCard);
+	    }
 		return this.shuffledDeck;
 	}
 	public ArrayList<Integer> addShuffledCardsIntoPlayerArray(){
+		addShuffledCardsIntoArray();
 		ArrayList<Integer> playerDeck = new ArrayList<Integer>();
 		
 		for(int j=0; j<7; j++) {
