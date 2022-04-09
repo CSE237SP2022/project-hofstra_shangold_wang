@@ -38,7 +38,7 @@ public class ShuffledDeck {
 	        shuffledDeck.add(removedCard);
 	    }
 		return this.shuffledDeck;
-	}
+	} 
 	public ArrayList<Integer> addShuffledCardsIntoPlayerArray(){
 		addShuffledCardsIntoArray();
 		ArrayList<Integer> playerDeck = new ArrayList<Integer>();
@@ -71,7 +71,7 @@ public class ShuffledDeck {
 		ArrayList<Integer> playerDeck = deck.addShuffledCardsIntoPlayerArray();
 		
 		//initializeDecks initial = new initializeDecks(4);
-		ArrayList<ArrayList<Integer>> fullDeck = deck.initializeDecks(4);
+		ArrayList<ArrayList<Integer>> fullDeck = deck.initializeDecks(2);
 	
 
 		//System.out.println(playerDeck);
