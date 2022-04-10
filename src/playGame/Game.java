@@ -77,6 +77,7 @@ public class Game {
 			takeCardFromDeck(this.player1);
 		}
 		System.out.println();
+		takeAwaySetOfThree(this.player1);
 	}
 	
 	public void player2Turn() {
@@ -88,6 +89,7 @@ public class Game {
 			takeCardFromDeck(this.player2);
 		}
 		System.out.println();
+		takeAwaySetOfThree(this.player2);
 	}
 	
 	public String determineWhoWon() {
@@ -99,6 +101,39 @@ public class Game {
 			return player2.name;
 		}
 	}
+	
+	public int checkIfSetOfThreeExists(Player player) {
+		for (int i = 0; i < player.deck.size(); i++) {
+			int cardCount = 0;
+			for (int j = 0; j < player.deck.size(); j++) {
+				int currentCard = player.deck.get(i);
+				if (player.deck.get(j) == currentCard) {
+					cardCount += 1;
+				}
+				if (cardCount >= 3) return currentCard;
+			}
+			cardCount = 0;
+		}
+		return -1;
+	}
+	
+	public void updatePointsFromSetOfThree(Player player) {
+		player.points += 5;
+	}
+	
+	public int takeAwaySetOfThree(Player player) {
+		int setCard = checkIfSetOfThreeExists(player);
+		if (setCard != -1) {	
+			System.out.println(player.name + " has a set of three " + setCard + "'s to put down!");
+			player.deck.remove(player.deck.indexOf(setCard));
+			player.deck.remove(player.deck.indexOf(setCard));
+			player.deck.remove(player.deck.indexOf(setCard));
+			updatePointsFromSetOfThree(player);
+			System.out.println();
+		}
+		return setCard;
+	}
+
 	
 	public void startGameInputs() {
 		System.out.println("Welcome to Go Fish!");
@@ -122,6 +157,8 @@ public class Game {
 		System.out.println(player1.name + ": " + player1.points + " points");
 		System.out.println(player2.name + ": " + player2.points + " points");
 		System.out.print("-----------------------------");
+		System.out.println();
+		System.out.println();
 		System.out.println();
 	}
 	
