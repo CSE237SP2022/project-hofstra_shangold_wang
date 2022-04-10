@@ -63,18 +63,26 @@ public class GameTest {
 	}
 	
 	@Test
-	public void takeCardFromDeckTest() {
+	public void takeCardFromDeckSizeTest() {
+		Game newGame = new Game(20);
+		int initialDeckSize = newGame.player1.deck.size();
 		
-	}
-	
-	@Test 
-	public void playerTurnTest() {
+		newGame.takeCardFromDeck(newGame.player1);
+		int newDeckSize = newGame.player1.getDeck().size();
 		
+		assertEquals(newDeckSize, initialDeckSize + 1);
 	}
 	
 	@Test
-	public void otherPlayerHasCardTest() {
+	public void determineWhoWonTest() {
+		Game newGame = new Game(20);
+		newGame.player1.addPoints(10);
+		newGame.player2.addPoints(20);
+		newGame.player2.name = "test";
 		
+		String winner = newGame.determineWhoWon();
+		
+		assertEquals(newGame.player2.name, winner);
 	}
 
 }
