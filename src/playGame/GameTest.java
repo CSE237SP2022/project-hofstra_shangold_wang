@@ -84,5 +84,15 @@ public class GameTest {
 		
 		assertEquals(newGame.player2.name, winner);
 	}
+	
+	@Test
+	public void takeAwaySetsOf3SizeTest() {
+		
+	}
+	
+	@Test
+	public void takeAwaySetsOf3ContentsTest() {
+		
+	}
 
 }
