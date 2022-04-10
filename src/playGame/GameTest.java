@@ -2,6 +2,8 @@ package playGame;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -41,16 +43,6 @@ public class GameTest {
 	}
 	
 	@Test
-	public void checkIfPlayerDoesNotHaveCardTest() {
-		Game newGame = new Game(20);
-		int removedCard = newGame.player2.deck.remove(0);
-		
-		boolean hasCard = newGame.checkIfPlayerHasCard(newGame.player2, removedCard);
-		
-		assertFalse(hasCard);
-	}
-	
-	@Test
 	public void removeCardFromAnotherPlayerTest() {
 		Game newGame = new Game(20);
 		int initialDeckSize = newGame.player2.getDeck().size();
@@ -70,7 +62,7 @@ public class GameTest {
 		newGame.takeCardFromDeck(newGame.player1);
 		int newDeckSize = newGame.player1.getDeck().size();
 		
-		assertEquals(newDeckSize, initialDeckSize + 1);
+		assertEquals(initialDeckSize + 1, newDeckSize);
 	}
 	
 	@Test
@@ -86,13 +78,44 @@ public class GameTest {
 	}
 	
 	@Test
-	public void takeAwaySetsOf3SizeTest() {
+	public void checkIfSetOfThreeExistsTrueTest() {
+		Game newGame = new Game(20);
+		newGame.player1.deck.add(1);
+		newGame.player1.deck.add(1);
+		newGame.player1.deck.add(1);
+		
+		int setExists = newGame.checkIfSetOfThreeExists(newGame.player1);
+		
+		assertNotEquals(-1, setExists);
+	}
+	
+	@Test
+	public void takeAwaySetOfThreeSizeTest() {
+		Game newGame = new Game(20);
+		newGame.player1.deck.add(1);
+		newGame.player1.deck.add(1);
+		newGame.player1.deck.add(1);
+		int initialDeckSize = newGame.player1.deck.size();
+		
+		newGame.takeAwaySetOfThree(newGame.player1);
+		int newDeckSize = newGame.player1.deck.size();
+		
+		assertEquals(initialDeckSize - 3, newDeckSize);
 		
 	}
 	
 	@Test
-	public void takeAwaySetsOf3ContentsTest() {
+	public void updatePointsFromSetOfThreeTest() {
+		Game newGame = new Game(20);
+		int initialPoints = newGame.player1.points;
+		newGame.player1.deck.add(1);
+		newGame.player1.deck.add(1);
+		newGame.player1.deck.add(1);
 		
+		newGame.updatePointsFromSetOfThree(newGame.player1);
+		int updatedPoints = newGame.player1.points;
+		
+		assertEquals(initialPoints + 5, updatedPoints);
 	}
-
+	
 }
