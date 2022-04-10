@@ -31,7 +31,6 @@ public class Game {
 		mainDeck = fullDeck.get(1);
 		
 		input = new Scanner(System.in);
-		
 	}
 	
 	
@@ -59,8 +58,6 @@ public class Game {
 			taker.points += 1;
 			System.out.println();
 		}
-		
-		
 	}
 	
 	public void takeCardFromDeck(Player taker) {
@@ -69,18 +66,15 @@ public class Game {
 		System.out.println("Go Fish! " + taker.name + 
 				" took a card from the deck.");
 		System.out.println();
-		
 	}
 	
 	public void player1Turn() {
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
 		if (checkIfPlayerHasCard(this.player2, nextCard)) {
-			// take card from other player
 			takeCardFromAnotherPlayer(this.player1, this.player2, nextCard);
 		} else {
 			takeCardFromDeck(this.player1);
-			// take card from deck
 		}
 		System.out.println();
 	}
@@ -89,11 +83,9 @@ public class Game {
 		System.out.print("What card does " + player2.name + " want to ask for? ");
 		int nextCard = input.nextInt();
 		if (checkIfPlayerHasCard(this.player1, nextCard)) {
-			// take card from other player
 			takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
 		} else {
 			takeCardFromDeck(this.player2);
-			// take card from deck
 		}
 		System.out.println();
 	}
@@ -141,45 +133,11 @@ public class Game {
 			player2Turn();
 			updatedPoints();
 		}
-		
 		System.out.println("The Game is over! " + determineWhoWon() + " won the game!");
 	}
-	
-	
-//	public static void main(String[] args) {
-//		Game newGame = new Game(20);
-//		Player p1 = newGame.player1;
-//		Player p2 = newGame.player2;
-//		Scanner input = new Scanner(System.in);
-//		while (newGame.gameIsStillGoing()) {
-//			
-//			if (newGame.playerTurn() == "user-1") {
-//				
-//				System.out.println("What card does Player 1 want to ask for?");
-//				int nextCard = input.nextInt();
-//				if (newGame.otherPlayerHasCard(p1, nextCard)) {
-//					// take card from other player
-//				} else {
-//					// take card from deck
-//				}
-//				
-//			} else if (newGame.playerTurn() == "user-2") {
-//				
-//				System.out.println("What card does Player 2 want to ask for?");
-//				int nextCard = input.nextInt();
-//				if (newGame.otherPlayerHasCard(p2, nextCard)) {
-//					// take card from other player
-//				} else {
-//					// take card from deck
-//				}
-//			}
-//		}
-//		
-//	}
 	
 	public static void main(String[] args) {
 		Game newGame = new Game(5);
 		newGame.playGame();
 	}
-
 }
