@@ -6,16 +6,16 @@ After you call the script, the game will ask you for your and your opponent's na
 
 # Overall info for Iteration 2 (was note creator app, now changed to go fish app)
 
-## What user stories were completed this iteration? 
+### What user stories were completed this iteration? 
 We worked on the the go fish game during this iteration. More specifically, we developed a Player object; a class that keeps track of the Player's deck of cards and alters them when needed; a class that updates the Player's points when there exists a set of three of the same cards in the Player's deck; and a class that calls all of these other classes and methods to actually run the program.
 
-## What user stories do you intend to complete next iteration? 
+### What user stories do you intend to complete next iteration? 
 We intend to make a Computer player object, as right now there can only be human-user players. Also, we want to add different game functionality with more rule flexibility and have the user decide how many players can play the game, as right now, only two players can play at a time.
 
-## Is there anything that you implemented but doesn't currently work? 
+### Is there anything that you implemented but doesn't currently work? 
 The update-points-when-sets class is still a work in progress; and currently, if you take a card from a player, the other player will be able to take the card right back. We plan on fixing this in the next iteration.
 
-## What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
+### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
 Just call the script!:)
 
 ## Primary Branches that we created for the game
