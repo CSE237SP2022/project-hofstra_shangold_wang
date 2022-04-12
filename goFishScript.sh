@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd ./src
-javac ./playGame/Game.java
-java playGame.Game
+javac -d ./bin ./playGame/Game.java
+java -cp bin playGame.Game
