@@ -9,10 +9,9 @@ What user stories do you intend to complete next iteration? make methods that ne
 Is there anything that you implemented but doesn't currently work? I don't think so.
 
 
-## Statistics Branch
-What user stories were completed this iteration? I have finished a class that calculateese basic statistics/summary of an String array input including the word count and the first longest word.
-
-What user stories do you intend to complete next iteration? making methods that calculate more advanced statistics/summary of the String array input such as the total number of characters or all longest words if there is a tie.
+## Player-deck-helper-methods Branch
+What user stories were completed this iteration? Helper methods were made to help with game functionality. This includes methods to check if a player has a given card and methods to take cards from another player or the main deck. Methods were also made to determine when a player has a full set of any card number or if any deck is out of cards.
+What user stories do you intend to complete next iteration? Methods can be added for a computer player to automate parts of a turn. This would allow users to play both against other players or against the computer.
 
 Is there anything that you implemented but doesn't currently work? No, I believe everything works currently.
 
