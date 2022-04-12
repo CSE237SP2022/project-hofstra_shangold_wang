@@ -18,7 +18,7 @@ The update-points-when-sets class is still a work in progress; and currently, if
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
 Just call the script!:)
 
-## Primary Branches that we created for the game
+# Primary Branches that we created for the game
 
 ### go-fish-script Branch
 Includes the script that runs the game.
