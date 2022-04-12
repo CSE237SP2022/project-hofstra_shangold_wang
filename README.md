@@ -12,7 +12,7 @@ Is there anything that you implemented but doesn't currently work? I don't think
 ## Player-deck-helper-methods Branch
 What user stories were completed this iteration? Helper methods were made to help with game functionality. This includes methods to check if a player has a given card and methods to take cards from another player or the main deck. Methods were also made to determine when a player has a full set of any card number or if any deck is out of cards.
 
-What user stories do you intend to complete next iteration? Methods can be added for a computer player to automate parts of a turn. This would allow users to play both against other players or against the computer.
+What user stories do you intend to complete next iteration? This branch is mostly complete.
 
 Is there anything that you implemented but doesn't currently work? No, I believe everything works currently.
 
