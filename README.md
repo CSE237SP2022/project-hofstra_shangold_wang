@@ -1,6 +1,6 @@
 # project-hofstra_shangold_wang
 project-hofstra_shangold_wang created by GitHub Classroom
-
+## Note: this was formerly the Note Creator Project
 # READ ME FOR HOW TO PLAY
 After you call the script, the game will ask you for your and your opponent's names (you will alternate turns with your opponent). Each of you will start with 7 cards in your deck. When prompted you can ask for cards 1-13 (representing Ace-King in a deck of cards). If you find a card in an opponent's deck, you will take their card and get 1 point added to your score. If not, you will "go fish" in the main deck of cards, and automatically take one card. If you have a set of three cards, 5 points will be added to your score. Right now, we currently have the game set up so whoever gets 5 points first, wins (just to keep the game quick, for now).
 
