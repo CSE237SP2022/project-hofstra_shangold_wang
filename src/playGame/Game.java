@@ -69,7 +69,16 @@ public class Game {
 		System.out.println();
 	}
 	
+	public void clearConsole() {
+		for (int i = 0; i < 50; i++) {
+			System.out.println();
+		}
+	}
+	
+	
+	
 	public void player1Turn() {
+		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
 		if (checkIfPlayerHasCard(this.player2, nextCard)) {
@@ -79,6 +88,7 @@ public class Game {
 		}
 		System.out.println();
 		takeAwaySetOfThree(this.player1);
+		clearConsole();
 	}
 	
 	public void player2Turn() {
@@ -93,6 +103,7 @@ public class Game {
 			System.out.println();
 			takeAwaySetOfThree(this.player2);
 		} else {
+			goFish.printDeck(this.player2.deck);
 			System.out.print("What card does " + player2.name + " want to ask for? ");
 			int nextCard = input.nextInt();
 			if (checkIfPlayerHasCard(this.player1, nextCard)) {
@@ -102,6 +113,7 @@ public class Game {
 			}
 			System.out.println();
 			takeAwaySetOfThree(this.player2);
+			clearConsole();
 		}
 	}
 	
