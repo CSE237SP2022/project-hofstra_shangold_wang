@@ -11,12 +11,13 @@ public class Game {
 	
 	public int goalPoints;
 	private Scanner input;
-	public Player player1;
-	public Player player2;
-	public ArrayList<Integer> mainDeck;
-	public ArrayList<ArrayList<Integer>> fullDeck;
-	public ShuffledDeck allDecks;
-	public GoFish goFish;
+	Player player1;
+	Player player2;
+	private ArrayList<Integer> mainDeck;
+	private ArrayList<ArrayList<Integer>> fullDeck;
+	private ShuffledDeck allDecks;
+	private GoFish goFish;
+	private boolean isComputer = false;
 	
 	public Game(int goalPoints) {
 		this.goalPoints = goalPoints;
@@ -81,15 +82,27 @@ public class Game {
 	}
 	
 	public void player2Turn() {
-		System.out.print("What card does " + player2.name + " want to ask for? ");
-		int nextCard = input.nextInt();
-		if (checkIfPlayerHasCard(this.player1, nextCard)) {
-			takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
+		if (this.isComputer) {
+			System.out.print("Computer's Turn! ");
+			int nextCard = goFish.computerSelectCardToTarget(this.player2.deck);
+			if (checkIfPlayerHasCard(this.player1, nextCard)) {
+				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
+			} else {
+				takeCardFromDeck(this.player2);
+			}
+			System.out.println();
+			takeAwaySetOfThree(this.player2);
 		} else {
-			takeCardFromDeck(this.player2);
+			System.out.print("What card does " + player2.name + " want to ask for? ");
+			int nextCard = input.nextInt();
+			if (checkIfPlayerHasCard(this.player1, nextCard)) {
+				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
+			} else {
+				takeCardFromDeck(this.player2);
+			}
+			System.out.println();
+			takeAwaySetOfThree(this.player2);
 		}
-		System.out.println();
-		takeAwaySetOfThree(this.player2);
 	}
 	
 	public String determineWhoWon() {
@@ -144,6 +157,9 @@ public class Game {
 		
 		System.out.print("What is Player 2's name? ");
 		this.player2.name = input.next();
+		if (this.player2.name.toLowerCase().equals("computer")) {
+			this.isComputer = true;
+		}
 		
 		System.out.println("Welcome " + this.player2.name + "!");
 		System.out.println("Alright, let's start the game, good luck!!");
