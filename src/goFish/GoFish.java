@@ -12,7 +12,7 @@ public class GoFish {
 	public void printDeck(ArrayList<Integer> playerDeck) {
 		System.out.println("Cards in Player's deck: ");
 		for (int i = 0; i < playerDeck.size(); i++) {
-			System.out.print(playerDeck.get(i)+", ");	
+			System.out.print(" |" + playerDeck.get(i)+"| ");	
 		}
 		System.out.println("");
 	}
