@@ -37,10 +37,14 @@ public class GoFish {
 		return cardThere;
 	}
 	
-	public void takeCardFromAnotherPlayer(int card, ArrayList<Integer> playerToDeck, ArrayList<Integer> playerFromDeck) {
+	public void takeCardFromAnotherPlayer(int card, Player taker, Player giver) {
+		ArrayList<Integer> playerToDeck = taker.deck;
+		ArrayList<Integer> playerFromDeck = giver.deck;
 		ArrayList<Integer> moveCards = new ArrayList<Integer>();
 		for (int i = 0; i < playerFromDeck.size(); i++) {
 			if (card == playerFromDeck.get(i)) {
+				System.out.println("Card found! " + taker.name + 
+						" took " + card + " from " + giver.name + ".");
 				moveCards.add(card);
 				playerFromDeck.remove(i);
 				i = i-1;
@@ -51,9 +55,12 @@ public class GoFish {
 		}
 	}
 	
-	public boolean takeCardFromDeck(ArrayList<Integer> playerToDeck, ArrayList<Integer> mainDeck) {
+	public boolean takeCardFromDeck(Player taker, ArrayList<Integer> mainDeck) {
+		ArrayList<Integer> playerToDeck = taker.deck;
 		if (mainDeck.size() > 0) {
 			int card = mainDeck.remove(0);
+			System.out.println("Go Fish! " + taker.name + 
+					" took a card from the deck.");
 			playerToDeck.add(card);
 			return true;
 		}

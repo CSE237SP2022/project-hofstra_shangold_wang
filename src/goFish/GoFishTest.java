@@ -16,30 +16,31 @@ import player.Player;
 
 class GoFishTest {
 	
-	ArrayList<Integer> playerToDeck = new ArrayList<Integer>();	
-	ArrayList<Integer> playerFromDeck = new ArrayList<Integer>();
+
 	ArrayList<Integer> mainDeck = new ArrayList<Integer>();
 	Player player1 = new Player("player1");
 	Player player2 = new Player("player2");
+//	ArrayList<Integer> playerToDeck = player1.deck;//new ArrayList<Integer>();	
+//	ArrayList<Integer> playerFromDeck = player2.deck;//new ArrayList<Integer>();
 	GoFish goFish = new GoFish();
 
 	@BeforeEach
 	public void setup() {
-		playerToDeck.add(1);
-		playerFromDeck.add(1);
+		player1.deck.add(1);
+		player2.deck.add(1);
 	}
 	
 	@Test
 	void selectCardFromOne() {
-		int testedCardSelect = goFish.computerSelectCardToTarget(playerToDeck);
+		int testedCardSelect = goFish.computerSelectCardToTarget(player1.deck);
 		assertEquals(1, testedCardSelect);
 	}
 	
 	@Test
 	void selectCardFromThree() {
-		playerToDeck.add(1);
-		playerToDeck.add(1);
-		int testedCardSelect = goFish.computerSelectCardToTarget(playerToDeck);
+		player1.deck.add(1);
+		player1.deck.add(1);
+		int testedCardSelect = goFish.computerSelectCardToTarget(player1.deck);
 		assertEquals(1, testedCardSelect);
 	}
 	
@@ -47,65 +48,68 @@ class GoFishTest {
 	void testCardNotFound() {
 		
 		int card = 2;
-		boolean present = goFish.cardFound(card, playerFromDeck);
+		boolean present = goFish.cardFound(card, player2.deck);
 		assertEquals(false, present);
 	}
 	
 	@Test
 	void testCardFound() {
 		int card = 1;
-		boolean present = goFish.cardFound(card, playerFromDeck);
+		boolean present = goFish.cardFound(card, player2.deck);
 		assertEquals(true, present);
 	}
 	
 	@Test
 	void moveSingleCardPresent() {
 		int card = 1;
-		goFish.takeCardFromAnotherPlayer(card, playerToDeck, playerFromDeck);
-		int updatedSize = playerToDeck.size();
-		assertEquals(2, updatedSize);
+		player1.deck.clear();
+		player2.deck.clear();
+		player1.deck.add(1);
+		goFish.takeCardFromAnotherPlayer(card, player2, player1);
+		int updatedSize = player2.deck.size();
+		assertEquals(1, updatedSize);
 	}
 	
 	@Test
 	void moveMultipleCardsPresent() {
 		int card = 1;
-		playerFromDeck.add(1);
-		goFish.takeCardFromAnotherPlayer(card, playerToDeck, playerFromDeck);
-		int updatedSize = playerToDeck.size();
+		player2.deck.add(1);
+		goFish.takeCardFromAnotherPlayer(card, player1, player2);
+		int updatedSize = player1.deck.size();
 		assertEquals(3, updatedSize);
 	}
 	
 	@Test
 	void moveMainDeckAbsent() {
-		boolean mainDeckPresent = goFish.takeCardFromDeck(playerToDeck, mainDeck);
+		boolean mainDeckPresent = goFish.takeCardFromDeck(player1, mainDeck);
 		assertEquals(false, mainDeckPresent);
 	}
 	
 	@Test
 	void moveMainDeckPresent() {
 		mainDeck.add(2);
-		boolean mainDeckPresent = goFish.takeCardFromDeck(playerToDeck, mainDeck);
+		boolean mainDeckPresent = goFish.takeCardFromDeck(player1, mainDeck);
 		assertEquals(true, mainDeckPresent);
 	}
 	
 	@Test
 	void fullSetFalse() {
-		boolean isFull = goFish.fullSet(1, playerFromDeck);
+		boolean isFull = goFish.fullSet(1, player2.deck);
 		assertEquals(false, isFull);
 	}
 	
 	@Test
 	void fullSetTrue() {
-		playerFromDeck.add(1);
-		playerFromDeck.add(1);
-		playerFromDeck.add(1);
-		boolean isFull = goFish.fullSet(1, playerFromDeck);
+		player2.deck.add(1);
+		player2.deck.add(1);
+		player2.deck.add(1);
+		boolean isFull = goFish.fullSet(1, player2.deck);
 		assertEquals(true, isFull);
 	}
 
 	@Test
 	void emptySetFalse() {
-		boolean isEmpty = goFish.emptyDeck(playerFromDeck);
+		boolean isEmpty = goFish.emptyDeck(player2.deck);
 		assertEquals(false, isEmpty);
 	}
 	
@@ -126,12 +130,13 @@ class GoFishTest {
 	
 	@Test
 	public void removeCardFromAnotherPlayerTest() {
+		player2.deck.clear();
 		player2.deck.add(1);
 		player2.deck.add(2);
 		int initialDeckSize = player2.getDeck().size();
 		int card = player2.deck.get(0);
 		
-		goFish.takeCardFromAnotherPlayer(card, player1.deck, player2.deck);
+		goFish.takeCardFromAnotherPlayer(card, player1, player2);
 		int newDeckSize = player2.getDeck().size();
 				
 		assertEquals(newDeckSize, initialDeckSize - 1);
@@ -143,7 +148,7 @@ class GoFishTest {
 		ArrayList<Integer> mainDeck = new ArrayList<Integer>();
 		mainDeck.add(3);
 		
-		goFish.takeCardFromDeck(player1.deck, mainDeck);
+		goFish.takeCardFromDeck(player1, mainDeck);
 		int newDeckSize = player1.getDeck().size();
 		
 		assertEquals(initialDeckSize + 1, newDeckSize);
