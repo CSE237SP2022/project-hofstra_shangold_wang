@@ -45,88 +45,73 @@ public class Game {
 		}
 	}
 	
-	public boolean checkIfPlayerHasCard(Player player, int card) {
-		ArrayList<Integer> playerDeck = player.deck;
-		return goFish.cardFound(card, playerDeck);
-	}
-	
-	public void takeCardFromAnotherPlayer(Player taker, Player giver, int card) {
-		if (goFish.cardFound(card, giver.deck)) {
-			card = giver.deck.remove(giver.deck.indexOf(card));
-			taker.deck.add(card);
-			System.out.println("Card found! " + taker.name + 
-					" took " + card + " from " + giver.name + ".");
-			taker.points += 1;
-			System.out.println();
-		}
-	}
-	
-	public void takeCardFromDeck(Player taker) {
-		int cardFromDeck = mainDeck.remove(mainDeck.size() - 1);
-		taker.deck.add(cardFromDeck);
-		System.out.println("Go Fish! " + taker.name + 
-				" took a card from the deck.");
-		System.out.println();
-	}
-	
-	public void clearConsole() {
+	public void clearConsole() throws InterruptedException {
+		System.out.println("CLEARING CONSOLE IN 3 SECONDS");
+		Thread.sleep(3000);
 		for (int i = 0; i < 50; i++) {
 			System.out.println();
 		}
+		
+	}
+	
+	public void cardNotFoundOnPlayerInput(Player player, int nextCard) {
+		while (!goFish.checkIfPlayerHasCard(player, nextCard)) {
+			System.out.println("Card not found");
+			System.out.println("What card does " + player.name + " want to ask for? ");
+			nextCard = input.nextInt();
+		}
+	}
+	
+	public void cardFoundOnPlayerInput(Player player, Player otherPlayer, int nextCard) {
+		if (goFish.checkIfPlayerHasCard(player, nextCard)) {
+			goFish.takeCardFromAnotherPlayer(nextCard, player, otherPlayer);
+		} else {
+			goFish.takeCardFromDeck(player, this.mainDeck);
+		}
+	}
+	
+	public void player2ComputerTurn() {
+		System.out.print("Computer's Turn! ");
+		int nextCard = goFish.computerSelectCardToTarget(this.player2.deck);
+		if (goFish.checkIfPlayerHasCard(this.player1, nextCard)) {
+			goFish.takeCardFromAnotherPlayer(nextCard, this.player2, this.player1);
+		} else {
+			goFish.takeCardFromDeck(this.player2, this.mainDeck);
+		}
+		System.out.println();
+		goFish.takeAwaySetOfThree(this.player2);
+	}
+	
+	public void player2UserTurn() throws InterruptedException {
+		System.out.print("*" + this.player2.name + "* ");
+		goFish.printDeck(this.player2.deck);
+		System.out.print("What card does " + player2.name + " want to ask for? ");
+		int nextCard = input.nextInt();
+		cardNotFoundOnPlayerInput(this.player2, nextCard);
+		cardFoundOnPlayerInput(this.player2, this.player1, nextCard);
+		System.out.println();
+		goFish.takeAwaySetOfThree(this.player2);
+		clearConsole();
 	}
 	
 	
-	
-	
-	public void player1Turn() {
+	public void player1Turn() throws InterruptedException {
 		System.out.print("*" + this.player1.name + "* ");
 		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
-		while (!checkIfPlayerHasCard(this.player1, nextCard)) {
-			System.out.println("Card not found");
-			System.out.println("What card does " + player1.name + " want to ask for? ");
-			nextCard = input.nextInt();
-		}
-		if (checkIfPlayerHasCard(this.player2, nextCard)) {
-			takeCardFromAnotherPlayer(this.player1, this.player2, nextCard);
-		} else {
-			takeCardFromDeck(this.player1);
-		}
+		cardNotFoundOnPlayerInput(this.player1, nextCard);
+		cardFoundOnPlayerInput(this.player1, this.player2, nextCard);
 		System.out.println();
-		takeAwaySetOfThree(this.player1);
+		goFish.takeAwaySetOfThree(this.player1);
 		clearConsole();
 	}
 	
-	public void player2Turn() {
+	public void player2Turn() throws InterruptedException {
 		if (this.isComputer) {
-			System.out.print("Computer's Turn! ");
-			int nextCard = goFish.computerSelectCardToTarget(this.player2.deck);
-			if (checkIfPlayerHasCard(this.player1, nextCard)) {
-				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
-			} else {
-				takeCardFromDeck(this.player2);
-			}
-			System.out.println();
-			takeAwaySetOfThree(this.player2);
+			player2ComputerTurn();
 		} else {
-			System.out.print("*" + this.player2.name + "* ");
-			goFish.printDeck(this.player2.deck);
-			System.out.print("What card does " + player2.name + " want to ask for? ");
-			int nextCard = input.nextInt();
-			while (!checkIfPlayerHasCard(this.player2, nextCard)) {
-				System.out.println("Card not found");
-				System.out.println("What card does " + player2.name + " want to ask for? ");
-				nextCard = input.nextInt();
-			}
-			if (checkIfPlayerHasCard(this.player1, nextCard)) {
-				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
-			} else {
-				takeCardFromDeck(this.player2);
-			}
-			System.out.println();
-			takeAwaySetOfThree(this.player2);
-			clearConsole();
+			player2UserTurn();
 		}
 	}
 	
@@ -138,38 +123,6 @@ public class Game {
 		} else {
 			return player2.name;
 		}
-	}
-	
-	public int checkIfSetOfThreeExists(Player player) {
-		for (int i = 0; i < player.deck.size(); i++) {
-			int cardCount = 0;
-			for (int j = 0; j < player.deck.size(); j++) {
-				int currentCard = player.deck.get(i);
-				if (player.deck.get(j) == currentCard) {
-					cardCount += 1;
-				}
-				if (cardCount >= 3) return currentCard;
-			}
-			cardCount = 0;
-		}
-		return -1;
-	}
-	
-	public void updatePointsFromSetOfThree(Player player) {
-		player.points += 5;
-	}
-	
-	public int takeAwaySetOfThree(Player player) {
-		int setCard = checkIfSetOfThreeExists(player);
-		if (setCard != -1) {	
-			System.out.println(player.name + " has a set of three " + setCard + "'s to put down!");
-			player.deck.remove(player.deck.indexOf(setCard));
-			player.deck.remove(player.deck.indexOf(setCard));
-			player.deck.remove(player.deck.indexOf(setCard));
-			updatePointsFromSetOfThree(player);
-			System.out.println();
-		}
-		return setCard;
 	}
 
 	
@@ -203,7 +156,7 @@ public class Game {
 		System.out.println();
 	}
 	
-	public void playGame() {
+	public void playGame() throws InterruptedException {
 		startGameInputs();
 		
 		while(gameIsStillGoing()) {
@@ -214,7 +167,7 @@ public class Game {
 		System.out.println("The Game is over! " + determineWhoWon() + " won the game!");
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		Game newGame = new Game(5);
 		newGame.playGame();
 	}
