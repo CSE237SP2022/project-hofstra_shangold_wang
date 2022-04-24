@@ -45,30 +45,6 @@ public class Game {
 		}
 	}
 	
-	public boolean checkIfPlayerHasCard(Player player, int card) {
-		ArrayList<Integer> playerDeck = player.deck;
-		return goFish.cardFound(card, playerDeck);
-	}
-	
-	public void takeCardFromAnotherPlayer(Player taker, Player giver, int card) {
-		if (goFish.cardFound(card, giver.deck)) {
-			card = giver.deck.remove(giver.deck.indexOf(card));
-			taker.deck.add(card);
-			System.out.println("Card found! " + taker.name + 
-					" took " + card + " from " + giver.name + ".");
-			taker.points += 1;
-			System.out.println();
-		}
-	}
-	
-	public void takeCardFromDeck(Player taker) {
-		int cardFromDeck = mainDeck.remove(mainDeck.size() - 1);
-		taker.deck.add(cardFromDeck);
-		System.out.println("Go Fish! " + taker.name + 
-				" took a card from the deck.");
-		System.out.println();
-	}
-	
 	public void clearConsole() {
 		for (int i = 0; i < 50; i++) {
 			System.out.println();
@@ -83,18 +59,18 @@ public class Game {
 		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
-		while (!checkIfPlayerHasCard(this.player1, nextCard)) {
+		while (!goFish.checkIfPlayerHasCard(this.player1, nextCard)) {
 			System.out.println("Card not found");
 			System.out.println("What card does " + player1.name + " want to ask for? ");
 			nextCard = input.nextInt();
 		}
-		if (checkIfPlayerHasCard(this.player2, nextCard)) {
-			takeCardFromAnotherPlayer(this.player1, this.player2, nextCard);
+		if (goFish.checkIfPlayerHasCard(this.player2, nextCard)) {
+			goFish.takeCardFromAnotherPlayer(nextCard, this.player1.deck, this.player2.deck);
 		} else {
-			takeCardFromDeck(this.player1);
+			goFish.takeCardFromDeck(this.player1.deck, this.mainDeck);
 		}
 		System.out.println();
-		takeAwaySetOfThree(this.player1);
+		goFish.takeAwaySetOfThree(this.player1);
 		clearConsole();
 	}
 	
@@ -102,30 +78,30 @@ public class Game {
 		if (this.isComputer) {
 			System.out.print("Computer's Turn! ");
 			int nextCard = goFish.computerSelectCardToTarget(this.player2.deck);
-			if (checkIfPlayerHasCard(this.player1, nextCard)) {
-				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
+			if (goFish.checkIfPlayerHasCard(this.player1, nextCard)) {
+				goFish.takeCardFromAnotherPlayer(nextCard, this.player2.deck, this.player1.deck);
 			} else {
-				takeCardFromDeck(this.player2);
+				goFish.takeCardFromDeck(this.player2.deck, this.mainDeck);
 			}
 			System.out.println();
-			takeAwaySetOfThree(this.player2);
+			goFish.takeAwaySetOfThree(this.player2);
 		} else {
 			System.out.print("*" + this.player2.name + "* ");
 			goFish.printDeck(this.player2.deck);
 			System.out.print("What card does " + player2.name + " want to ask for? ");
 			int nextCard = input.nextInt();
-			while (!checkIfPlayerHasCard(this.player2, nextCard)) {
+			while (!goFish.checkIfPlayerHasCard(this.player2, nextCard)) {
 				System.out.println("Card not found");
 				System.out.println("What card does " + player2.name + " want to ask for? ");
 				nextCard = input.nextInt();
 			}
-			if (checkIfPlayerHasCard(this.player1, nextCard)) {
-				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
+			if (goFish.checkIfPlayerHasCard(this.player1, nextCard)) {
+				goFish.takeCardFromAnotherPlayer(nextCard, this.player2.deck, this.player1.deck);
 			} else {
-				takeCardFromDeck(this.player2);
+				goFish.takeCardFromDeck(this.player2.deck, this.mainDeck);
 			}
 			System.out.println();
-			takeAwaySetOfThree(this.player2);
+			goFish.takeAwaySetOfThree(this.player2);
 			clearConsole();
 		}
 	}
@@ -138,38 +114,6 @@ public class Game {
 		} else {
 			return player2.name;
 		}
-	}
-	
-	public int checkIfSetOfThreeExists(Player player) {
-		for (int i = 0; i < player.deck.size(); i++) {
-			int cardCount = 0;
-			for (int j = 0; j < player.deck.size(); j++) {
-				int currentCard = player.deck.get(i);
-				if (player.deck.get(j) == currentCard) {
-					cardCount += 1;
-				}
-				if (cardCount >= 3) return currentCard;
-			}
-			cardCount = 0;
-		}
-		return -1;
-	}
-	
-	public void updatePointsFromSetOfThree(Player player) {
-		player.points += 5;
-	}
-	
-	public int takeAwaySetOfThree(Player player) {
-		int setCard = checkIfSetOfThreeExists(player);
-		if (setCard != -1) {	
-			System.out.println(player.name + " has a set of three " + setCard + "'s to put down!");
-			player.deck.remove(player.deck.indexOf(setCard));
-			player.deck.remove(player.deck.indexOf(setCard));
-			player.deck.remove(player.deck.indexOf(setCard));
-			updatePointsFromSetOfThree(player);
-			System.out.println();
-		}
-		return setCard;
 	}
 
 	

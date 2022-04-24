@@ -2,6 +2,8 @@ package goFish;
 
 import java.util.ArrayList;
 
+import player.Player;
+
 public class GoFish {
 	
 	
@@ -35,7 +37,7 @@ public class GoFish {
 		return cardThere;
 	}
 	
-	public void moveCardPresent(int card, ArrayList<Integer> playerToDeck, ArrayList<Integer> playerFromDeck) {
+	public void takeCardFromAnotherPlayer(int card, ArrayList<Integer> playerToDeck, ArrayList<Integer> playerFromDeck) {
 		ArrayList<Integer> moveCards = new ArrayList<Integer>();
 		for (int i = 0; i < playerFromDeck.size(); i++) {
 			if (card == playerFromDeck.get(i)) {
@@ -49,7 +51,7 @@ public class GoFish {
 		}
 	}
 	
-	public boolean moveCardAbsent(ArrayList<Integer> playerToDeck, ArrayList<Integer> mainDeck) {
+	public boolean takeCardFromDeck(ArrayList<Integer> playerToDeck, ArrayList<Integer> mainDeck) {
 		if (mainDeck.size() > 0) {
 			int card = mainDeck.remove(0);
 			playerToDeck.add(card);
@@ -90,5 +92,42 @@ public class GoFish {
 	}
 	
 	
+	public boolean checkIfPlayerHasCard(Player player, int card) {
+		ArrayList<Integer> playerDeck = player.deck;
+		return cardFound(card, playerDeck);
+	}
+	
+	
+	public int checkIfSetOfThreeExists(Player player) {
+		for (int i = 0; i < player.deck.size(); i++) {
+			int cardCount = 0;
+			for (int j = 0; j < player.deck.size(); j++) {
+				int currentCard = player.deck.get(i);
+				if (player.deck.get(j) == currentCard) {
+					cardCount += 1;
+				}
+				if (cardCount >= 3) return currentCard;
+			}
+			cardCount = 0;
+		}
+		return -1;
+	}
+	
+	public void updatePointsFromSetOfThree(Player player) {
+		player.points += 5;
+	}
+	
+	public int takeAwaySetOfThree(Player player) {
+		int setCard = checkIfSetOfThreeExists(player);
+		if (setCard != -1) {	
+			System.out.println(player.name + " has a set of three " + setCard + "'s to put down!");
+			player.deck.remove(player.deck.indexOf(setCard));
+			player.deck.remove(player.deck.indexOf(setCard));
+			player.deck.remove(player.deck.indexOf(setCard));
+			updatePointsFromSetOfThree(player);
+			System.out.println();
+		}
+		return setCard;
+	}
 	
 }
