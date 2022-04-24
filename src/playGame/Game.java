@@ -77,11 +77,17 @@ public class Game {
 	
 	
 	
+	
 	public void player1Turn() {
 		System.out.print("*" + this.player1.name + "* ");
 		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
+		while (!checkIfPlayerHasCard(this.player1, nextCard)) {
+			System.out.println("Card not found");
+			System.out.println("What card does " + player1.name + " want to ask for? ");
+			nextCard = input.nextInt();
+		}
 		if (checkIfPlayerHasCard(this.player2, nextCard)) {
 			takeCardFromAnotherPlayer(this.player1, this.player2, nextCard);
 		} else {
@@ -108,6 +114,11 @@ public class Game {
 			goFish.printDeck(this.player2.deck);
 			System.out.print("What card does " + player2.name + " want to ask for? ");
 			int nextCard = input.nextInt();
+			while (!checkIfPlayerHasCard(this.player2, nextCard)) {
+				System.out.println("Card not found");
+				System.out.println("What card does " + player2.name + " want to ask for? ");
+				nextCard = input.nextInt();
+			}
 			if (checkIfPlayerHasCard(this.player1, nextCard)) {
 				takeCardFromAnotherPlayer(this.player2, this.player1, nextCard);
 			} else {
