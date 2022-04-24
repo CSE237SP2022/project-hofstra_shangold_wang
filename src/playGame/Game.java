@@ -78,6 +78,7 @@ public class Game {
 	
 	
 	public void player1Turn() {
+		System.out.print("*" + this.player1.name + "* ");
 		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
@@ -103,6 +104,7 @@ public class Game {
 			System.out.println();
 			takeAwaySetOfThree(this.player2);
 		} else {
+			System.out.print("*" + this.player2.name + "* ");
 			goFish.printDeck(this.player2.deck);
 			System.out.print("What card does " + player2.name + " want to ask for? ");
 			int nextCard = input.nextInt();
