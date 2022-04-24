@@ -9,6 +9,12 @@ public class GoFish {
 		
 	}
 	
+	public int computerSelectCardToTarget(ArrayList<Integer> computerDeck) {
+		int selectedIndex = (int) (Math.random()*computerDeck.size());
+		int selectedCard = computerDeck.get(selectedIndex);
+		return selectedCard;
+	}
+	
 	public boolean cardFound(int card, ArrayList<Integer> playerDeck) {
 		boolean cardThere = false;
 		

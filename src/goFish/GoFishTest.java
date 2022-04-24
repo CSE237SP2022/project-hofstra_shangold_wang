@@ -22,6 +22,20 @@ class GoFishTest {
 	}
 	
 	@Test
+	void selectCardFromOne() {
+		int testedCardSelect = goFish.computerSelectCardToTarget(playerToDeck);
+		assertEquals(1, testedCardSelect);
+	}
+	
+	@Test
+	void selectCardFromThree() {
+		playerToDeck.add(1);
+		playerToDeck.add(1);
+		int testedCardSelect = goFish.computerSelectCardToTarget(playerToDeck);
+		assertEquals(1, testedCardSelect);
+	}
+	
+	@Test
 	void testCardNotFound() {
 		
 		int card = 2;
