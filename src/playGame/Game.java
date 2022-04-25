@@ -128,6 +128,15 @@ public class Game {
 	
 	public void startGameInputs() {
 		System.out.println("Welcome to Go Fish!");
+		System.out.println("Here are the rules:");
+		System.out.println("GoFish is a one or two player game. "
+				+ "Each player starts with 7 cards. "
+				+ "At the start of the turn, a player will look at their hand and ask the other player if that player has the card in their hand. "
+				+ "If the other player has the asked for card, all copies of that card must be given to the asking player. "
+				+ "If the asked player does not have the card, they have to Go Fish and draw one card from the main deck. "
+				+ "Points are awarded for obtaining a set of three cards. "
+				+ "The game ends when there are no more cards left."
+				+ " Whoever has the most points at the end wins!");
 		System.out.print("What is Player 1's name? ");
 		this.player1.name = input.next();
 		System.out.println("Welcome " + this.player1.name + "!");
