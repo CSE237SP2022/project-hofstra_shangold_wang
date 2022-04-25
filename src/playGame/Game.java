@@ -38,7 +38,7 @@ public class Game {
 	
 	public boolean gameIsStillGoing() {
 		if (player1.points < this.goalPoints && player2.points < this.goalPoints
-				&& player1.deck.size() > 0 && player2.deck.size() > 0) {
+				&& player1.deck.size() > 0 && player2.deck.size() > 0 && !goFish.emptyDeck(mainDeck)) {
 			return true;
 		} else {
 			return false;
@@ -63,7 +63,7 @@ public class Game {
 	}
 	
 	public void cardFoundOnPlayerInput(Player player, Player otherPlayer, int nextCard) {
-		if (goFish.checkIfPlayerHasCard(player, nextCard)) {
+		if (goFish.checkIfPlayerHasCard(otherPlayer, nextCard)) {
 			goFish.takeCardFromAnotherPlayer(nextCard, player, otherPlayer);
 		} else {
 			goFish.takeCardFromDeck(player, this.mainDeck);
@@ -129,14 +129,14 @@ public class Game {
 	public void startGameInputs() {
 		System.out.println("Welcome to Go Fish!");
 		System.out.println("Here are the rules:");
-		System.out.println("GoFish is a one or two player game. "
-				+ "Each player starts with 7 cards. "
-				+ "At the start of the turn, a player will look at their hand and ask the other player if that player has the card in their hand. "
-				+ "If the other player has the asked for card, all copies of that card must be given to the asking player. "
-				+ "If the asked player does not have the card, they have to Go Fish and draw one card from the main deck. "
-				+ "Points are awarded for obtaining a set of three cards. "
-				+ "The game ends when there are no more cards left."
-				+ " Whoever has the most points at the end wins!");
+		System.out.println("GoFish is a one or two player game. Each player starts with 7 cards.");
+		System.out.println("At the start of the turn, a player will look at their hand and ask the other player if that player has the card in their hand.");
+		System.out.println("If the other player has the asked for card, all copies of that card must be given to the asking player.");
+		System.out.println("If the asked player does not have the card, they have to Go Fish and draw one card from the main deck.");
+		System.out.println("Points are awarded for obtaining a set of three cards.");
+		System.out.println("The game ends when there are no more cards left or a player completes 5 sets.");
+		System.out.println("Whoever has the most points at the end wins!");
+		System.out.println("To play against a computer user, type 'computer' as Player 2's name.");
 		System.out.print("What is Player 1's name? ");
 		this.player1.name = input.next();
 		System.out.println("Welcome " + this.player1.name + "!");

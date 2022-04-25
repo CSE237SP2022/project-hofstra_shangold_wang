@@ -93,21 +93,6 @@ class GoFishTest {
 	}
 	
 	@Test
-	void fullSetFalse() {
-		boolean isFull = goFish.fullSet(1, player2.deck);
-		assertEquals(false, isFull);
-	}
-	
-	@Test
-	void fullSetTrue() {
-		player2.deck.add(1);
-		player2.deck.add(1);
-		player2.deck.add(1);
-		boolean isFull = goFish.fullSet(1, player2.deck);
-		assertEquals(true, isFull);
-	}
-
-	@Test
 	void emptySetFalse() {
 		boolean isEmpty = goFish.emptyDeck(player2.deck);
 		assertEquals(false, isEmpty);

@@ -69,27 +69,6 @@ public class GoFish {
 		}
 	}
 	
-	public boolean fullSet(int card, ArrayList<Integer> playerDeck) {
-		int numberOfCard = 0;
-		for (int i = 0; i < playerDeck.size(); i++) {
-			if (card == playerDeck.get(i)) {
-				numberOfCard = numberOfCard + 1;
-			}
-		}
-		boolean setFull = false;
-		if (numberOfCard == 4) {
-			setFull = true;
-			for (int i = 0; i < playerDeck.size(); i++) {
-				if (card == playerDeck.get(i)) {
-					playerDeck.remove(i);
-					i = i-1;
-				}
-			}
-		}
-		
-		return setFull;
-	}
-	
 	public boolean emptyDeck(ArrayList<Integer> Deck) {
 		boolean empty = false;
 		if (Deck.size() == 0) {
@@ -121,7 +100,7 @@ public class GoFish {
 	}
 	
 	public void updatePointsFromSetOfThree(Player player) {
-		player.points += 5;
+		player.points += 1;
 	}
 	
 	public int takeAwaySetOfThree(Player player) {
