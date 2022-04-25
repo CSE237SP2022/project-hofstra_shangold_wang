@@ -54,12 +54,13 @@ public class Game {
 		
 	}
 	
-	public void cardNotFoundOnPlayerInput(Player player, int nextCard) {
+	public int cardNotFoundOnPlayerInput(Player player, int nextCard) {
 		while (!goFish.checkIfPlayerHasCard(player, nextCard)) {
 			System.out.println("Card not found");
 			System.out.println("What card does " + player.name + " want to ask for? ");
 			nextCard = input.nextInt();
 		}
+		return nextCard;
 	}
 	
 	public void cardFoundOnPlayerInput(Player player, Player otherPlayer, int nextCard) {
@@ -87,7 +88,7 @@ public class Game {
 		goFish.printDeck(this.player2.deck);
 		System.out.print("What card does " + player2.name + " want to ask for? ");
 		int nextCard = input.nextInt();
-		cardNotFoundOnPlayerInput(this.player2, nextCard);
+		nextCard = cardNotFoundOnPlayerInput(this.player2, nextCard);
 		cardFoundOnPlayerInput(this.player2, this.player1, nextCard);
 		System.out.println();
 		goFish.takeAwaySetOfThree(this.player2);
@@ -100,7 +101,7 @@ public class Game {
 		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
-		cardNotFoundOnPlayerInput(this.player1, nextCard);
+		nextCard = cardNotFoundOnPlayerInput(this.player1, nextCard);
 		cardFoundOnPlayerInput(this.player1, this.player2, nextCard);
 		System.out.println();
 		goFish.takeAwaySetOfThree(this.player1);
