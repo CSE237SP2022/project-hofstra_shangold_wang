@@ -7,7 +7,7 @@ After you call the script, the game will ask you for your and your opponent's na
 # Overall info for Iteration 3 (was note creator app, now changed to go fish app)
 
 ### What user stories were completed this iteration? 
-We worked on the go fish game during this iteration. More specifically, we developed an extension of the Player object so we can have a computer play against a user; we added more methods to print out the contents of the players' decks; we added methods to confirm that a player can rightfully ask for a card; and we refactored the class that calls all of these other classes and methods to actually run the program. 
+We worked on the go fish game during this iteration. More specifically, we developed an extension of the Player object so we can have a computer play against a user; we added more methods to print out the contents of the players' decks; we added methods to confirm that a player can rightfully ask for a card; and we refactored the class that calls all of these other classes and methods to actually run the program. We also added an introduction to the game with general rules so that new players understand how the game works. We polished the game code to fix bugs with the game's rules. We renamed methods and variables to be easier to understand.
 
 ### Is there anything that you implemented but doesn't currently work? 
 Nope!
