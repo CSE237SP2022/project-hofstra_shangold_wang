@@ -21,7 +21,7 @@ Just call the script!:)
 Includes the script that runs the game.
 
 ### play-game Branch
-Includes tha main class that calls other classes and methods to run the game.
+Includes the main class that calls other classes and methods to run the game.
 
 ### player Branch
 Creates the player object, with deck, name, and points instance variables.
