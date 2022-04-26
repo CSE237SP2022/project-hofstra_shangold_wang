@@ -2,7 +2,8 @@
 project-hofstra_shangold_wang created by GitHub Classroom
 ## Note: this was formerly the Note Creator Project
 # READ ME FOR HOW TO PLAY
-After you call the script, the game will ask you for your and your opponent's names (you will alternate turns with your opponent). NOTE: If you wish to player a computer, type in "computer" for the name of player 2. Each of you will start with 7 cards in your deck. When prompted you can ask for cards 1-13 (representing Ace-King in a deck of cards). If you find a card in an opponent's deck, you will take their card and get 1 point added to your score. If not, you will "go fish" in the main deck of cards, and automatically take one card. If you have a set of three cards, 5 points will be added to your score. Right now, we currently have the game set up so whoever gets 5 points first, wins (just to keep the game quick, for now).
+After you call the script, the game will ask you for your and your opponent's names (you will alternate turns with your opponent). NOTE: If you wish to player a computer, type in "computer" for the name of player 2. Each of you will start with 7 cards in your deck. When prompted you can ask for cards 1-13 (representing Ace-King in a deck of cards). If you find a card in an opponent's deck, you will take their card. If not, you will "go fish" in the main deck of cards, and automatically take one card. If you have a set of three cards, 1 point will be added to your score. Right now, we currently have the game set up so whoever gets 5 points first, wins.
+NOTE: To quit the game at any time, just type in 20 as a card input.
 
 # Overall info for Iteration 3 (was note creator app, now changed to go fish app)
 
