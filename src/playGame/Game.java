@@ -18,6 +18,7 @@ public class Game {
 	private ShuffledDeck allDecks;
 	private GoFish goFish;
 	private boolean isComputer = false;
+	private boolean toQuit = false;
 	
 	public Game(int goalPoints) {
 		this.goalPoints = goalPoints;
@@ -59,6 +60,8 @@ public class Game {
 			System.out.println("Card not found");
 			System.out.println("What card does " + player.name + " want to ask for? ");
 			nextCard = input.nextInt();
+			this.toQuit = quitGame(nextCard);
+			if (this.toQuit) break;
 		}
 		return nextCard;
 	}
@@ -72,15 +75,17 @@ public class Game {
 	}
 	
 	public void player2ComputerTurn() {
-		System.out.print("Computer's Turn! ");
-		int nextCard = goFish.computerSelectCardToTarget(this.player2.deck);
-		if (goFish.checkIfPlayerHasCard(this.player1, nextCard)) {
-			goFish.takeCardFromAnotherPlayer(nextCard, this.player2, this.player1);
-		} else {
-			goFish.takeCardFromDeck(this.player2, this.mainDeck);
+		if (!this.toQuit) {
+			System.out.print("Computer's Turn! ");
+			int nextCard = goFish.computerSelectCardToTarget(this.player2.deck);
+			if (goFish.checkIfPlayerHasCard(this.player1, nextCard)) {
+				goFish.takeCardFromAnotherPlayer(nextCard, this.player2, this.player1);
+			} else {
+				goFish.takeCardFromDeck(this.player2, this.mainDeck);
+			}
+			System.out.println();
+			goFish.takeAwaySetOfThree(this.player2);
 		}
-		System.out.println();
-		goFish.takeAwaySetOfThree(this.player2);
 	}
 	
 	public void player2UserTurn() throws InterruptedException {
@@ -88,11 +93,17 @@ public class Game {
 		goFish.printDeck(this.player2.deck);
 		System.out.print("What card does " + player2.name + " want to ask for? ");
 		int nextCard = input.nextInt();
-		nextCard = cardNotFoundOnPlayerInput(this.player2, nextCard);
-		cardFoundOnPlayerInput(this.player2, this.player1, nextCard);
-		System.out.println();
-		goFish.takeAwaySetOfThree(this.player2);
-		clearConsole();
+		this.toQuit = quitGame(nextCard);
+		if (!this.toQuit) {
+			nextCard = cardNotFoundOnPlayerInput(this.player2, nextCard);
+			if (!this.toQuit) {
+				cardFoundOnPlayerInput(this.player2, this.player1, nextCard);
+				System.out.println();
+				goFish.takeAwaySetOfThree(this.player2);
+				clearConsole();
+			}
+		}
+
 	}
 	
 	
@@ -101,11 +112,16 @@ public class Game {
 		goFish.printDeck(this.player1.deck);
 		System.out.print("What card does " + player1.name + " want to ask for? ");
 		int nextCard = input.nextInt();
-		nextCard = cardNotFoundOnPlayerInput(this.player1, nextCard);
-		cardFoundOnPlayerInput(this.player1, this.player2, nextCard);
-		System.out.println();
-		goFish.takeAwaySetOfThree(this.player1);
-		clearConsole();
+		this.toQuit = quitGame(nextCard);
+		if (!this.toQuit) {
+			nextCard = cardNotFoundOnPlayerInput(this.player1, nextCard);
+			if (!this.toQuit) {
+				cardFoundOnPlayerInput(this.player1, this.player2, nextCard);
+				System.out.println();
+				goFish.takeAwaySetOfThree(this.player1);
+				clearConsole();
+			}
+		}
 	}
 	
 	public void player2Turn() throws InterruptedException {
@@ -125,6 +141,13 @@ public class Game {
 			return player2.name;
 		}
 	}
+	
+	public boolean quitGame(int inputNumber) {
+		if (inputNumber == 20) {
+			return true;
+		}
+		return false;
+	}
 
 	
 	public void startGameInputs() {
@@ -138,6 +161,7 @@ public class Game {
 		System.out.println("The game ends when there are no more cards left or a player completes 5 sets.");
 		System.out.println("Whoever has the most points at the end wins!");
 		System.out.println("To play against a computer user, type 'computer' as Player 2's name.");
+		System.out.println("NOTE: To quit the game at any time, just type in 20 for the card input.");
 		System.out.print("What is Player 1's name? ");
 		this.player1.name = input.next();
 		System.out.println("Welcome " + this.player1.name + "!");
@@ -169,10 +193,13 @@ public class Game {
 	public void playGame() throws InterruptedException {
 		startGameInputs();
 		
-		while(gameIsStillGoing()) {
+		while(gameIsStillGoing() && !this.toQuit) {
 			player1Turn();
 			player2Turn();
 			updatedPoints();
+		}
+		if (this.toQuit) {
+			System.out.println("You quit the game.");
 		}
 		System.out.println("The Game is over! " + determineWhoWon() + " won the game!");
 	}
