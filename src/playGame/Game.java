@@ -9,7 +9,7 @@ import player.Player;
 
 public class Game {
 	
-	public int goalPoints;
+	private int goalPoints;
 	private Scanner input;
 	Player player1;
 	Player player2;
@@ -29,7 +29,7 @@ public class Game {
 		fullDeck = allDecks.initializeDecks(2);
 		player1.deck = fullDeck.get(0);
 		player2.deck = fullDeck.get(1);
-		mainDeck = fullDeck.get(1);
+		mainDeck = fullDeck.get(2);
 		
 		input = new Scanner(System.in);
 	}

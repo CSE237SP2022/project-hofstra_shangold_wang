@@ -31,13 +31,13 @@ class GoFishTest {
 	}
 	
 	@Test
-	void selectCardFromOne() {
+	void computerSelectCardFromOne() {
 		int testedCardSelect = goFish.computerSelectCardToTarget(player1.deck);
 		assertEquals(1, testedCardSelect);
 	}
 	
 	@Test
-	void selectCardFromThree() {
+	void computerSelectCardFromThree() {
 		player1.deck.add(1);
 		player1.deck.add(1);
 		int testedCardSelect = goFish.computerSelectCardToTarget(player1.deck);
@@ -105,12 +105,20 @@ class GoFishTest {
 	}
 	
 	@Test
-	public void checkIfPlayerHasCardTest() {
+	public void checkIfPlayerHasCardTrueTest() {
 		player1.deck.add(2);
 		
 		boolean hasCard = goFish.checkIfPlayerHasCard(player1, 2);
 		
 		assertTrue(hasCard);
+	}
+	
+	@Test
+	public void checkIfPlayerHasCardFalseTest() {
+		
+		boolean hasCard = goFish.checkIfPlayerHasCard(player1, 2);
+		
+		assertFalse(hasCard);
 	}
 	
 	@Test
@@ -147,7 +155,14 @@ class GoFishTest {
 		
 		int setExists = goFish.checkIfSetOfThreeExists(player1);
 		
-		assertNotEquals(-1, setExists);
+		assertEquals(1, setExists);
+	}
+	
+	@Test
+	public void checkIfSetOfThreeExistsFalseTest() {
+		int setExists = goFish.checkIfSetOfThreeExists(player1);
+		
+		assertEquals(-1, setExists);
 	}
 	
 	@Test
@@ -174,7 +189,7 @@ class GoFishTest {
 		goFish.updatePointsFromSetOfThree(player1);
 		int updatedPoints = player1.points;
 		
-		assertEquals(initialPoints + 5, updatedPoints);
+		assertEquals(initialPoints + 1, updatedPoints);
 	}
 	
 }
